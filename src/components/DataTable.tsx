@@ -38,7 +38,10 @@ const DataTable: React.FC<{
         </TableHeader>
         <TableBody>
           {items.map(item => (
-            <TableRow key={item.id} data-testid={`table-row-${item.listId}-${item.id}`}>
+            <TableRow
+              key={item.id}
+              data-testid={`table-row-${item.listId}-${item.id}`}
+            >
               {showListId ? <TableCell>{item.listId}</TableCell> : null}
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>

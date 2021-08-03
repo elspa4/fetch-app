@@ -41,13 +41,6 @@ const ListGroups: React.FC = () => {
       })
   }, [])
 
-  /**
-   * TODOS:
-   * - write unit tests
-   * - cleanup repo
-   * - deploy
-   */
-
   return (
     <>
       <Heading>Elena's Coding Challenge App</Heading>
