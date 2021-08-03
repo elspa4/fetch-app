@@ -33,7 +33,7 @@ const ListGroups: React.FC = () => {
         setAllData(response.ungrouped)
       })
       .catch(e => {
-        console.log(`Failed to fetch data groups: ${e}`)
+        console.error(`Failed to fetch data groups: ${e}`)
         setError(true)
       })
       .finally(() => {
@@ -43,8 +43,6 @@ const ListGroups: React.FC = () => {
 
   /**
    * TODOS:
-   * - decide on display
-   * - optimize functions
    * - write unit tests
    * - cleanup repo
    * - deploy
@@ -53,40 +51,45 @@ const ListGroups: React.FC = () => {
   return (
     <>
       <Heading>Elena's Coding Challenge App</Heading>
-      {error ? <div>Oh no, something went wrong!</div> : null}
-      {loading || dataByListId?.length < 1 ? (
-        <CircularProgress />
+      {error ? (
+        <div data-testid={'error'}>Oh no, something went wrong!</div>
       ) : (
         <>
-          <Tabs
-            value={tab}
-            onChange={handleTabChange}
-            centered
-            indicatorColor="primary"
-            textColor="primary"
-          >
-            <Tab label={'All'} />
-            {dataByListId.map(dataGroup => (
-              <Tab
-                key={`tab-${dataGroup.listId}`}
-                label={`List ID: ${dataGroup.listId}`}
-              />
-            ))}
-          </Tabs>
-          <>
-            <TabPanel tabValue={tab} index={0}>
-              <DataTable items={allData} showListId />
-            </TabPanel>
-            {dataByListId.map((dataGroup, index) => (
-              <TabPanel
-                tabValue={tab}
-                index={index + 1}
-                key={`tab-${dataGroup.listId}`}
+          {loading || dataByListId?.length < 1 ? (
+            <CircularProgress />
+          ) : (
+            <>
+              <Tabs
+                value={tab}
+                onChange={handleTabChange}
+                centered
+                indicatorColor="primary"
+                textColor="primary"
               >
-                <DataTable items={dataGroup.items} />
-              </TabPanel>
-            ))}
-          </>
+                <Tab label={'All'} />
+                {dataByListId.map(dataGroup => (
+                  <Tab
+                    key={`tab-${dataGroup.listId}`}
+                    label={`List ID: ${dataGroup.listId}`}
+                  />
+                ))}
+              </Tabs>
+              <>
+                <TabPanel tabValue={tab} index={0}>
+                  <DataTable items={allData} showListId />
+                </TabPanel>
+                {dataByListId.map((dataGroup, index) => (
+                  <TabPanel
+                    tabValue={tab}
+                    index={index + 1}
+                    key={`tab-${dataGroup.listId}`}
+                  >
+                    <DataTable items={dataGroup.items} />
+                  </TabPanel>
+                ))}
+              </>
+            </>
+          )}
         </>
       )}
     </>
