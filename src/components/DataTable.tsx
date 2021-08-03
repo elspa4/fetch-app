@@ -10,11 +10,16 @@ import {
 } from '@material-ui/core'
 
 import { Item } from '../types'
+import { PRIMARY_COLOR } from '../styles'
 
-export const Container = styled(TableContainer)`
+const Container = styled(TableContainer)`
   border: 1px solid #e3e3e3;
   margin: auto;
   max-width: 500px;
+`
+
+const TableHeader = styled(TableHead)`
+  background: ${PRIMARY_COLOR};
 `
 
 const DataTable: React.FC<{
@@ -24,13 +29,13 @@ const DataTable: React.FC<{
   return (
     <Container>
       <Table size="small">
-        <TableHead>
+        <TableHeader>
           <TableRow>
             {showListId ? <TableCell>List ID</TableCell> : null}
             <TableCell>ID</TableCell>
             <TableCell>Name</TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {items.map(item => (
             <TableRow key={item.id}>

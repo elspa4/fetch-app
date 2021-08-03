@@ -1,6 +1,11 @@
 import axios from 'axios'
 import { Item, ItemGroup } from './types'
 
+/**
+ * Gets a list of unsorted and unfiltered data
+ * from the Fetch hiring api, and returns it as
+ * an object containing a set of grouped and ungrouped items
+ */
 export const getListData = async () => {
   return axios
     .get('https://fetch-hiring.s3.amazonaws.com/hiring.json')
@@ -18,6 +23,7 @@ export const getListData = async () => {
       let ungrouped: Array<Item> = []
       uniqueListIds.forEach(id => {
         const groupById = filteredArray.filter(item => item.listId === id)
+        // there are faster sorts out there, but this should do
         groupById.sort((a, b) =>
           (a?.name || '').localeCompare(b?.name || '', undefined, {
             numeric: true,
