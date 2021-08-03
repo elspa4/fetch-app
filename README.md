@@ -15,6 +15,9 @@ You can pull clone this repo and run it locally on your machine by simply:
 I have included one short integration test that can be run with: 
 ```npm run test```
 
+## Notes
+* I used a very simple design that is not particularly user friendly because of the size of the list. I debated doing a scrollable table, but I thought that might not be quite as friendly for users on mobile. Instead, I opted to allow the user to tab through the list based on the List ID. 
+
 ## Resources
 * [Material UI component library](https://material-ui.com/)
 * [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
